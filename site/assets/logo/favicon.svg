@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img" aria-label="sfm">
+  <title>sfm</title>
+  <!-- Backing disc, so the mark holds on light and dark tab bars -->
+  <path d="M1.75 8a6.25 6.25 0 1 0 12.5 0a6.25 6.25 0 1 0 -12.5 0Z" fill="#0a1120"/>
+  <!-- Layer 3 (inner): the sweep line; the middle layer is dropped at 16px -->
+  <path d="M8 8L11.68 4.32" fill="none" stroke="#eaf1fb" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Layer 1 (outer): the scope ring -->
+  <path d="M1.75 8a6.25 6.25 0 1 0 12.5 0a6.25 6.25 0 1 0 -12.5 0Z" fill="none" stroke="#4d9fff" stroke-width="1.5"/>
+  <!-- Layer 3 (inner, continued): the found host -->
+  <path d="M4.7 10.05a1.25 1.25 0 1 0 2.5 0a1.25 1.25 0 1 0 -2.5 0Z" fill="#3ddc97"/>
+</svg>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<title>Privacy Policy · sfm</title>
+<meta name="description" content="What this website and the sfm application collect: no cookies, no analytics, no telemetry. Email you send to sfm@luongnv.com reaches the author.">
+<link rel="canonical" href="https://sfm.luongnv.com/privacy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sfm">
+<meta property="og:title" content="Privacy Policy · sfm">
+<meta property="og:description" content="What this website and the sfm application collect: no cookies, no analytics, no telemetry. Email you send to sfm@luongnv.com reaches the author.">
+<meta property="og:url" content="https://sfm.luongnv.com/privacy.html">
+<meta property="og:image" content="https://sfm.luongnv.com/assets/logo/logo-icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+<link rel="icon" sizes="48x48" href="assets/logo/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo/logo-icon-512.png">
+<link rel="preload" href="assets/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<!-- Draft for legal review: confirm every statement before publishing. -->
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="sfm home">
+<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<path class="mark-sector" d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z"/>
+<path class="mark-range" stroke-width="2" d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"/>
+<path class="mark-sweep" stroke-width="4" stroke-linecap="round" d="M32 32L47.56 16.44"/>
+<path class="mark-ring" stroke-width="5" d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z"/>
+<path class="mark-host" d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z"/>
+</svg>
+<span>sfm</span>
+<span class="brand-name">SSH Fleet Monitor</span>
+</a>
+<nav class="nav" aria-label="Main">
+<a class="nav-link" href="index.html#how">How it works</a>
+<a class="nav-link" href="index.html#security">Security</a>
+<a class="nav-link" href="index.html#faq">FAQ</a>
+<a class="nav-link" href="docs.html">Docs</a>
+<a class="btn btn-sm" href="mailto:sfm@luongnv.com?subject=sfm%20early%20access">Request early access</a>
+</nav>
+</div>
+</header>
+<main id="main" class="doc">
+<div class="wrap">
+<div class="doc-head">
+<h1>Privacy Policy</h1>
+<p class="doc-meta">Product/Service: sfm (SSH Fleet Monitor) and this website, sfm.luongnv.com<br>Effective date: 23 November 2026</p>
+</div>
+
+<div class="summary-box">
+<p><strong>Summary:</strong> This website sets no cookies and runs no analytics, and the sfm application has no telemetry. If you email sfm@luongnv.com, the author receives your address and your message and uses them to answer you.</p>
+</div>
+
+<h2>1. Information we collect</h2>
+<ul>
+<li><strong>This website.</strong> The site is static pages with no forms, no accounts, no cookies and no scripts. It is hosted on GitHub Pages, and GitHub, as the host, logs the IP address of each visitor for security purposes (see <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">GitHub's note on Pages data collection</a>). The author does not receive these logs.</li>
+<li><strong>Email you send.</strong> When you write to sfm@luongnv.com, the author receives your email address, the name your mail client sends and whatever you write.</li>
+<li><strong>The sfm application.</strong> sfm runs on your own machine. Its host inventory, scan results, findings and audit log stay in a local database in sfm's data directory on that machine. sfm has no telemetry and no hosted service, so none of it reaches the author.</li>
+</ul>
+
+<h2>2. How we use it</h2>
+<ul>
+<li>Email: to answer you and, if you asked for early access, to tell you when a build is available.</li>
+<li>Nothing else is collected, so nothing else is used.</li>
+</ul>
+
+<h2>3. Cookies and analytics</h2>
+<p>None. Each page loads only its own files from sfm.luongnv.com: no analytics, no tracking pixels, and no fonts or scripts from another site.</p>
+
+<h2>4. Sharing and processors</h2>
+<ul>
+<li><strong>GitHub</strong> hosts this website on GitHub Pages.</li>
+<li><strong>Cloudflare</strong> serves the DNS records of luongnv.com and routes mail sent to sfm@luongnv.com to the author's mailbox (Cloudflare Email Routing). Web traffic to this site does not pass through Cloudflare's proxy.</li>
+<li><strong>The sfm application.</strong> Besides the SSH connections to your own hosts, its only network traffic is downloading vulnerability data from seven allowlisted HTTPS sources: the Debian Security Tracker, Canonical's Ubuntu OVAL files, the Arch Security Tracker, the CISA Known Exploited Vulnerabilities catalog, the SOFA macOS and Safari feeds, and OSV.dev. OSV.dev receives CVE IDs only, never a package, version or hostname; those IDs are the fix-available CVEs found on your Debian hosts.</li>
+<li><strong>AI clients.</strong> If you connect an AI client to <code>sfm mcp</code>, that client may send sfm's answers to its model provider. The same goes for a report you export with <code>sfm report</code>: once data leaves sfm, sfm no longer protects it.</li>
+</ul>
+
+<h2>5. Retention</h2>
+<ul>
+<li>Email: no retention period is set. Messages stay in the author's mailbox until they are deleted.</li>
+<li>sfm's local data stays on your machine until you delete it. <code>sfm hosts remove ALIAS --yes</code> deletes everything sfm stored about one host.</li>
+</ul>
+
+<h2>6. Your choices</h2>
+<ul>
+<li>To ask what the author holds about you, or to ask for your emails to be deleted, write to sfm@luongnv.com.</li>
+<li>To run sfm with no outbound request for vulnerability data, start it with <code>sfm web --offline</code> or set <code>SFM_OFFLINE=1</code>.</li>
+</ul>
+
+<h2>7. Changes to this policy</h2>
+<p>Changes are published on this page with a new effective date. The page's history is public in <a href="https://github.com/luongnv89/sfm-website/commits/main/site/privacy.html">the website's repository</a>.</p>
+
+<h2>8. Contact</h2>
+<p><a href="mailto:sfm@luongnv.com">sfm@luongnv.com</a></p>
+
+<a class="back" href="index.html">Back to the sfm home page</a>
+</div>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="sfm home">
+<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<path class="mark-sector" d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z"/>
+<path class="mark-range" stroke-width="2" d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"/>
+<path class="mark-sweep" stroke-width="4" stroke-linecap="round" d="M32 32L47.56 16.44"/>
+<path class="mark-ring" stroke-width="5" d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z"/>
+<path class="mark-host" d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z"/>
+</svg>
+<span>sfm</span>
+<span class="brand-name">SSH Fleet Monitor</span>
+</a>
+<ul class="foot-links">
+<li><a href="privacy.html">Privacy Policy</a></li>
+<li><a href="changelog.html">Changelog</a></li>
+<li><a href="docs.html">Docs</a></li>
+<li><a href="mailto:sfm@luongnv.com">sfm@luongnv.com</a></li>
+</ul>
+</div>
+</footer>
+</body>
+</html>

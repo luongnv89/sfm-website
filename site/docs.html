@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<title>Getting started · sfm docs</title>
+<meta name="description" content="Requirements, first run, settings, commands and troubleshooting for sfm, the SSH Fleet Monitor.">
+<link rel="canonical" href="https://sfm.luongnv.com/docs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sfm">
+<meta property="og:title" content="Getting started · sfm docs">
+<meta property="og:description" content="Requirements, first run, settings, commands and troubleshooting for sfm, the SSH Fleet Monitor.">
+<meta property="og:url" content="https://sfm.luongnv.com/docs.html">
+<meta property="og:image" content="https://sfm.luongnv.com/assets/logo/logo-icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+<link rel="icon" sizes="48x48" href="assets/logo/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo/logo-icon-512.png">
+<link rel="preload" href="assets/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="sfm home">
+<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<path class="mark-sector" d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z"/>
+<path class="mark-range" stroke-width="2" d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"/>
+<path class="mark-sweep" stroke-width="4" stroke-linecap="round" d="M32 32L47.56 16.44"/>
+<path class="mark-ring" stroke-width="5" d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z"/>
+<path class="mark-host" d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z"/>
+</svg>
+<span>sfm</span>
+<span class="brand-name">SSH Fleet Monitor</span>
+</a>
+<nav class="nav" aria-label="Main">
+<a class="nav-link" href="index.html#how">How it works</a>
+<a class="nav-link" href="index.html#security">Security</a>
+<a class="nav-link" href="index.html#faq">FAQ</a>
+<a class="nav-link" href="docs.html" aria-current="page">Docs</a>
+<a class="btn btn-sm" href="mailto:sfm@luongnv.com?subject=sfm%20early%20access">Request early access</a>
+</nav>
+</div>
+</header>
+<main id="main" class="doc">
+<div class="wrap">
+<div class="doc-head">
+<h1>Docs: getting started</h1>
+<p class="doc-meta">Product/Service: sfm (SSH Fleet Monitor)</p>
+</div>
+
+<ul class="toc">
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#install">Install</a></li>
+<li><a href="#first-run">First run</a></li>
+<li><a href="#configure">Configure</a></li>
+<li><a href="#commands">Commands</a></li>
+<li><a href="#agents">AI agents</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li><strong>To run sfm:</strong> a Mac (Apple Silicon or Intel) or a Linux machine (x64 or arm64). There is no Windows build.</li>
+<li><strong>Hosts to watch:</strong> reachable over SSH with public-key sign-in, running macOS, Debian, Ubuntu or a derivative, or Arch Linux or a derivative.</li>
+<li><strong>Known host keys:</strong> each host's key in your <code>~/.ssh/known_hosts</code>. sfm never trusts a key on first use: connect once with <code>ssh</code> and accept the fingerprint yourself.</li>
+<li><strong>Only for pasted or generated keys:</strong> the OS keychain. On Linux that means <code>secret-tool</code> (the <code>libsecret-tools</code> package) and an unlocked keyring in a desktop session.</li>
+</ul>
+
+<h2 id="install">Install</h2>
+<p>sfm is a single binary, and nothing is installed on your hosts. Builds are not public yet: <a href="mailto:sfm@luongnv.com?subject=sfm%20early%20access">request early access</a> to be told when one is available.</p>
+
+<h2 id="first-run">First run</h2>
+<pre><code>sfm hosts import
+sfm hosts test --all
+sfm web</code></pre>
+<p><code>sfm hosts import</code> reads your <code>~/.ssh/config</code>. <code>sfm hosts test --all</code> signs in to each host and explains any failure. <code>sfm web</code> then prints:</p>
+<pre><code>sfm web: listening on http://127.0.0.1:PORT/ (Ctrl-C to stop)
+Open http://127.0.0.1:PORT/#token=TOKEN</code></pre>
+<p>Open the link. The token is new on every start, and the dashboard shows your hosts once their first status scan has run.</p>
+<p>Two other ways to add a host:</p>
+<pre><code>sfm hosts add admin@server.example.com
+sfm hosts add --local</code></pre>
+<p><code>--local</code> adds the machine sfm runs on. It needs no SSH server and no key.</p>
+
+<h2 id="configure">Configure</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Setting</th><th>Effect</th><th>Default</th></tr></thead>
+<tbody>
+<tr><td><code>SFM_DATA_DIR</code> (environment)</td><td>Where sfm keeps its database, session token and encrypted keys</td><td><code>$XDG_DATA_HOME/sfm</code>, else <code>~/.local/share/sfm</code></td></tr>
+<tr><td><code>sfm web --port N</code></td><td>The port the dashboard listens on, always on 127.0.0.1</td><td>0: any free port</td></tr>
+<tr><td><code>sfm web --offline</code> or <code>SFM_OFFLINE=1</code></td><td>Use cached vulnerability data only and send no request</td><td>Off</td></tr>
+<tr><td><code>sfm hosts report ALIAS --every DURATION</code></td><td>How often <code>sfm web</code> runs a status scan of the host, from 1m to 24h; <code>--off</code> stops it, <code>--default</code> restores the default</td><td>5m</td></tr>
+<tr><td><code>sfm hosts key ALIAS</code></td><td>The host's key: ssh-agent or <code>IdentityFile</code> (<code>--existing</code>), a key file (<code>--path FILE</code>), a key pasted on stdin (<code>--paste</code>) or a new ed25519 key (<code>--generate</code>)</td><td><code>--existing</code></td></tr>
+<tr><td><code>sfm hosts consent ALIAS --grant</code></td><td>Allow the Lynis audit on the host; <code>--revoke</code> withdraws it</td><td>Not granted</td></tr>
+<tr><td><code>sfm hosts public-ip ALIAS IP</code></td><td>Set the host's public IP for the report and the topology; sfm never looks it up online</td><td>A public address found on the host's own interfaces, if any</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="commands">Commands</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>sfm web</code></td><td>Serve the local web UI on 127.0.0.1 with a new session token</td></tr>
+<tr><td><code>sfm web --rotate-token</code></td><td>Issue a new token; a running <code>sfm web</code> rejects the old one</td></tr>
+<tr><td><code>sfm hosts import [--file PATH]</code></td><td>Import hosts from <code>~/.ssh/config</code>, or from another file</td></tr>
+<tr><td><code>sfm hosts add [USER@]HOST[:PORT]</code></td><td>Add a host by hand; <code>--jump USER@HOST[:PORT],...</code> goes through jump hosts, <code>--alias NAME</code> and <code>--tag TAG</code> name and tag it</td></tr>
+<tr><td><code>sfm hosts list</code></td><td>List the hosts in the inventory</td></tr>
+<tr><td><code>sfm hosts tag ALIAS TAG...</code></td><td>Tag a host, or remove its tags with <code>--remove</code></td></tr>
+<tr><td><code>sfm hosts test ALIAS... | --all</code></td><td>Test the connection to hosts and explain any failure</td></tr>
+<tr><td><code>sfm hosts keys</code></td><td>List each host's key: type, fingerprint and reference only</td></tr>
+<tr><td><code>sfm hosts key ALIAS --show-public</code></td><td>Print a pasted or generated key's public line and setup steps again</td></tr>
+<tr><td><code>sfm hosts disable ALIAS</code></td><td>Stop monitoring a host and keep its stored data; <code>sfm hosts enable ALIAS</code> turns it back on</td></tr>
+<tr><td><code>sfm hosts remove ALIAS --yes</code></td><td>Remove a host and delete everything sfm stored about it; cannot be undone</td></tr>
+<tr><td><code>sfm report --format ecs|prometheus</code></td><td>Print the fleet report from the stored scans as ECS NDJSON (Wazuh) or Prometheus text (Grafana); <code>--output PATH</code> writes a file, <code>--host ALIAS</code> limits it</td></tr>
+<tr><td><code>sfm mcp</code></td><td>Serve the read-only MCP tools on stdio for an AI agent</td></tr>
+<tr><td><code>sfm list-hosts --json</code></td><td>The MCP tools from the command line: also <code>get-host-status</code>, <code>list-findings</code>, <code>get-finding</code>, <code>get-fix-steps</code> and <code>refresh-host-status</code>, with the same arguments and the same JSON answer</td></tr>
+<tr><td><code>sfm licenses</code></td><td>Print the third-party notices and the Lynis license (GPL-3.0)</td></tr>
+<tr><td><code>sfm --version</code>, <code>sfm --help</code></td><td>Print the version, or the usage text</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="agents">AI agents</h2>
+<p><code>sfm mcp</code> lets Claude Code, Codex or any other stdio MCP client answer questions about your fleet from stored scan data, with no shell. For Claude Code, put this in a project's <code>.mcp.json</code>:</p>
+<pre><code>{
+  "mcpServers": {
+    "sfm": {
+      "command": "sfm",
+      "args": ["mcp"],
+      "env": {
+        "SFM_DATA_DIR": "/home/you/.local/share/sfm",
+        "SSH_AUTH_SOCK": "/run/user/1000/ssh-agent.socket"
+      }
+    }
+  }
+}</code></pre>
+<p>For Codex, in <code>~/.codex/config.toml</code>:</p>
+<pre><code>[mcp_servers.sfm]
+command = "sfm"
+args = ["mcp"]
+env = { SFM_DATA_DIR = "/home/you/.local/share/sfm", SSH_AUTH_SOCK = "/run/user/1000/ssh-agent.socket" }</code></pre>
+<p>Use the full path to the binary if <code>sfm</code> is not on the client's <code>PATH</code>, and your own agent socket (<code>echo $SSH_AUTH_SOCK</code>).</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Symptom</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td><code>sfm mcp</code> exits with status 1 and names a path</td><td>There is no database at that path, and <code>sfm mcp</code> never creates one. Add hosts and run <code>sfm web</code> first, and set <code>SFM_DATA_DIR</code> in the MCP client's <code>env</code> block: clients often start servers with a reduced environment.</td></tr>
+<tr><td>A connection test stops at a new or changed host key</td><td>sfm reads <code>known_hosts</code> and never writes it. Check the fingerprint and accept the key with <code>ssh</code>, as <code>sfm hosts test</code> explains.</td></tr>
+<tr><td><code>--paste</code> and <code>--generate</code> are disabled on a headless Linux server</td><td>They need the Secret Service through <code>secret-tool</code> and an unlocked keyring. Use ssh-agent or a key path instead.</td></tr>
+<tr><td><code>refresh_host_status</code> cannot sign in from an MCP client</td><td>It needs <code>SSH_AUTH_SOCK</code> in the client's <code>env</code> block for ssh-agent keys, and it never asks for a passphrase.</td></tr>
+<tr><td>macOS shows privacy prompts for your terminal while this machine is scanned</td><td>Expected when sfm is started from a GUI terminal: the scan's commands run as that terminal's child processes.</td></tr>
+<tr><td>The Lynis audit will not run on this machine</td><td>It refuses to run as root. Run sfm as a normal user to audit the machine it runs on.</td></tr>
+</tbody>
+</table>
+</div>
+
+<a class="back" href="index.html">Back to the sfm home page</a>
+</div>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="sfm home">
+<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<path class="mark-sector" d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z"/>
+<path class="mark-range" stroke-width="2" d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"/>
+<path class="mark-sweep" stroke-width="4" stroke-linecap="round" d="M32 32L47.56 16.44"/>
+<path class="mark-ring" stroke-width="5" d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z"/>
+<path class="mark-host" d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z"/>
+</svg>
+<span>sfm</span>
+<span class="brand-name">SSH Fleet Monitor</span>
+</a>
+<ul class="foot-links">
+<li><a href="privacy.html">Privacy Policy</a></li>
+<li><a href="changelog.html">Changelog</a></li>
+<li><a href="docs.html">Docs</a></li>
+<li><a href="mailto:sfm@luongnv.com">sfm@luongnv.com</a></li>
+</ul>
+</div>
+</footer>
+</body>
+</html>

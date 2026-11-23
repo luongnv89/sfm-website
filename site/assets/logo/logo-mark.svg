@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="sfm">
+  <title>sfm</title>
+  <!-- Layer 2 (middle detail): the swept sector and the range ring; dropped in favicon.svg -->
+  <g>
+    <path d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z" fill="#4d9fff" fill-opacity="0.26"/>
+    <path d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z" fill="none" stroke="#5b6f8f" stroke-width="2"/>
+  </g>
+  <!-- Layer 3 (inner): the sweep line; its tip tucks under the ring drawn next -->
+  <path d="M32 32L47.56 16.44" fill="none" stroke="#eaf1fb" stroke-width="4" stroke-linecap="round"/>
+  <!-- Layer 1 (outer): the scope ring, the perimeter sfm keeps watch over -->
+  <path d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z" fill="none" stroke="#4d9fff" stroke-width="5"/>
+  <!-- Layer 3 (inner, continued): the host the sweep has found -->
+  <path d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z" fill="#3ddc97"/>
+</svg>

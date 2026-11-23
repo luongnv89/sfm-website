@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<title>sfm: every Mac and Linux machine you own, on one screen</title>
+<meta name="description" content="sfm (SSH Fleet Monitor) reads your macOS and Linux machines over the SSH access you already have, runs no agent on them, and shows health, update and CVE risk, and the commands that fix it.">
+<link rel="canonical" href="https://sfm.luongnv.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sfm">
+<meta property="og:title" content="sfm: every Mac and Linux machine you own, on one screen">
+<meta property="og:description" content="sfm (SSH Fleet Monitor) reads your macOS and Linux machines over the SSH access you already have, runs no agent on them, and shows health, update and CVE risk, and the commands that fix it.">
+<meta property="og:url" content="https://sfm.luongnv.com/">
+<meta property="og:image" content="https://sfm.luongnv.com/assets/logo/logo-icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+<link rel="icon" sizes="48x48" href="assets/logo/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo/logo-icon-512.png">
+<link rel="preload" href="assets/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="sfm home">
+<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<path class="mark-sector" d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z"/>
+<path class="mark-range" stroke-width="2" d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"/>
+<path class="mark-sweep" stroke-width="4" stroke-linecap="round" d="M32 32L47.56 16.44"/>
+<path class="mark-ring" stroke-width="5" d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z"/>
+<path class="mark-host" d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z"/>
+</svg>
+<span>sfm</span>
+<span class="brand-name">SSH Fleet Monitor</span>
+</a>
+<nav class="nav" aria-label="Main">
+<a class="nav-link" href="#how">How it works</a>
+<a class="nav-link" href="#security">Security</a>
+<a class="nav-link" href="#faq">FAQ</a>
+<a class="nav-link" href="docs.html">Docs</a>
+<a class="btn btn-sm" href="mailto:sfm@luongnv.com?subject=sfm%20early%20access">Request early access</a>
+</nav>
+</div>
+</header>
+<main id="main">
+
+<section class="hero">
+<div class="scope" aria-hidden="true"></div>
+<div class="wrap">
+<div class="hero-copy">
+<p class="status">Early development: no public release yet</p>
+<h1>Every Mac and Linux machine you own, on one screen</h1>
+<p class="lede">Checking a handful of machines today means an SSH session on each one, then <code>top</code>, <code>df</code> and the package manager by hand. sfm reads them all over the SSH access you already have, runs no agent on them, and shows what is healthy, what is at risk and the commands that fix it.</p>
+<div class="actions">
+<a class="btn btn-lg" href="mailto:sfm@luongnv.com?subject=sfm%20early%20access"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>Request early access</a>
+<a class="btn btn-lg btn-ghost" href="docs.html">Read the getting-started guide</a>
+</div>
+<ul class="trust">
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Scans macOS, Debian, Ubuntu and Arch hosts</li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Dashboard on 127.0.0.1 only</li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>No telemetry</li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>300+ shell-quoting payloads fuzz-tested in CI</li>
+</ul>
+</div>
+
+</div>
+<div class="hero-base"></div>
+</section>
+
+<section class="section" id="problem">
+<div class="wrap split">
+<div class="section-head">
+<h2>Nobody is paid to watch your machines</h2>
+<p>You own a laptop, a couple of VPSs, a home server and a Raspberry Pi. They get checked when something breaks.</p>
+</div>
+<ul class="cases">
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7.5 9.5 3 2.5-3 2.5M12.5 15h4"/></svg><span>You open an SSH session on each box, run <code>top</code>, <code>df</code> and <code>apt</code> or <code>softwareupdate</code>, and try to remember which one was behind.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>The Pi in the cupboard has run the same packages since the day you set it up, because nothing reminds you it exists.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 6h14M5 10h14M5 14h9M5 18h6"/></svg><span>Linux monitoring tools skip your Mac, and the audit tool you did run printed a wall of findings without saying what to type next.</span></li>
+</ul>
+</div>
+</section>
+
+<section class="section band" id="cost">
+<div class="wrap split">
+<div class="section-head">
+<h2>A machine you forget is still online</h2>
+<p>It keeps running the packages it had the last time you looked.</p>
+</div>
+<ul class="cases cases-warn">
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5 3 19.5h18L12 3.5Z"/><path d="M12 10v4.5M12 17h.01"/></svg><span>A vulnerability with a known exploit sits on a public VPS for weeks, because finding it means checking every package on every host by hand.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><ellipse cx="12" cy="6.5" rx="7.5" ry="3"/><path d="M4.5 6.5v11c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-11M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg><span>A disk reaches 100% and takes a service down on the one box you did not check this month.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 8V4.5M9 13h.01M15 13h.01M9.5 16h5"/></svg><span>You give an AI agent a raw shell to save time, and now a tool with no audit trail can run any command on every machine you own.</span></li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="solution">
+<div class="wrap">
+<div class="section-head">
+<h2>One binary on your machine, read-only on theirs</h2>
+<p>sfm signs in to your hosts with the SSH keys you already use, runs fixed read-only collector scripts, and keeps the results in a local database behind a dashboard on 127.0.0.1.</p>
+</div>
+<div class="features">
+<article class="feature feature-wide">
+<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg>
+<h3>The whole fleet at a glance</h3>
+<p>Each host gets a health badge, a risk badge and its CPU, memory and fullest-disk use. Above them sit the three actions that matter most across every host.</p>
+</article>
+<article class="feature feature-wide">
+<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 4.5 6v5.5c0 4.4 3 8 7.5 9.5 4.5-1.500 7.500-5.100 7.500-9.500V6L12 3Z"/><path d="M12 8.5v4M12 15.500h.010"/></svg>
+<h3>Update and CVE risk per host</h3>
+<p>Pending updates and known vulnerabilities on macOS, Debian, Ubuntu and Arch, each matched against its own distribution's security data. Issues with a known exploit are ranked first.</p>
+</article>
+<article class="feature">
+<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 6h12M8 12h12M8 18h12"/><path d="M3.500 5.500 4.500 5v3M3.300 11.300a1 1 0 1 1 1.700.900L3.300 14h2M3.300 17h1.400a.9.900 0 0 1 0 1.800.9.900 0 0 1 0 1.800H3.300"/></svg>
+<h3>Fix steps you read before you run</h3>
+<p>Every finding opens to a plain explanation, numbered commands to copy, a "needs admin" label where root is required, a verify step and a rollback note. sfm never runs them.</p>
+</article>
+<article class="feature">
+<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 8V4.500M9 13h.010M15 13h.010M9.500 16h5"/></svg>
+<h3>A safe way to ask an AI agent</h3>
+<p><code>sfm mcp</code> gives Claude Code, Codex or any stdio MCP client six typed, read-only tools. No tool takes a command or returns a key, and every call is written to the audit log.</p>
+</article>
+<article class="feature">
+<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.500" cy="10.500" r="6"/><path d="m15 15 5 5M8.300 10.700l1.600 1.600 3-3.200"/></svg>
+<h3>An inside audit when you ask for one</h3>
+<p>With your consent per host, sfm copies a pinned Lynis release to a temp directory on the host, runs it, deletes it and checks that it is gone.</p>
+</article>
+</div>
+<p class="versus">Agent-based monitoring puts a daemon on every box you add. sfm runs none: it shows macOS and Linux hosts in the same view over SSH, and its dashboard has no option to listen beyond 127.0.0.1.</p>
+
+</div>
+</section>
+
+<section class="section band" id="how">
+<div class="wrap">
+<div class="section-head">
+<h2>From SSH config to first scan in three commands</h2>
+</div>
+<ol class="steps">
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v10M8 10.500l4 4 4-4M5 19.500h14"/></svg>
+<h3>Import your hosts</h3>
+<p><code>sfm hosts import</code> reads your <code>~/.ssh/config</code>. <code>sfm hosts add</code> takes one by hand, and <code>--local</code> adds the machine sfm runs on.</p></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/><path d="m11 12 8.500-8.500M16 7l2.500 2.500M13.500 9.500l2 2"/></svg>
+<h3>Test the sign-in</h3>
+<p><code>sfm hosts test --all</code> connects to each host and explains any failure in plain words.</p></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4.500" width="18" height="12.500" rx="2"/><path d="M8.500 20.500h7M12 17v3.500M7 13l3-3.500 2.500 2 4.500-4.500"/></svg>
+<h3>Open the dashboard</h3>
+<p><code>sfm web</code> prints a local link. Status scans then repeat every 5 minutes unless you change the interval.</p></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.500 6.500a4 4 0 0 0-5.300 5.300L4 17l3 3 5.200-5.200a4 4 0 0 0 5.300-5.300L15 12l-3-3 2.500-2.500Z"/></svg>
+<h3>Fix what it found</h3>
+<p>Open a finding, copy its steps, run them yourself, then scan again to see it resolved.</p></li>
+</ol>
+<div class="actions after-steps">
+<a class="btn btn-lg" href="mailto:sfm@luongnv.com?subject=sfm%20early%20access"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>Request early access</a>
+</div>
+</div>
+</section>
+
+<section class="section" id="security">
+<div class="wrap">
+<div class="section-head">
+<h2>sfm holds the access to your fleet. This is how it guards it.</h2>
+</div>
+<ul class="guards">
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><code>sfm web</code> listens on 127.0.0.1 only, with no option to change it, and every API request needs a token that is new on each start.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Host keys are checked strictly against your <code>known_hosts</code> file, which sfm reads and never writes. It never trusts a key on first use.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Every argument sent over SSH goes through one quoting helper, fuzz-tested in CI with 300+ payloads.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Every command sent to a host and every agent tool call is a row in an audit log that refuses updates and deletes.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Besides SSH, the only network traffic is vulnerability data from seven allowlisted HTTPS sources. There is no telemetry, and <code>--offline</code> sends nothing.</span></li>
+</ul>
+<p class="note">sfm has no public release yet, so there are no customer quotes here. These are facts about the build.</p>
+</div>
+</section>
+
+<section class="section band" id="faq">
+<div class="wrap">
+<div class="section-head">
+<h2>Questions before you ask for access</h2>
+</div>
+<div class="faq">
+<details>
+<summary>Does sfm install or change anything on my machines?</summary>
+<p>No agent, no daemon and no changes. Status and risk scans run fixed read-only scripts over SSH and write no files of their own on the host. Fix steps are text to copy: sfm never runs them. The optional Lynis audit is the one exception. It needs your consent per host, runs from a temp directory and removes it afterwards.</p>
+</details>
+<details>
+<summary>Which systems does it cover?</summary>
+<p>sfm runs on macOS (Apple Silicon and Intel) and Linux (x64 and arm64). It scans hosts running macOS, Debian, Ubuntu and its derivatives, and Arch Linux and its derivatives. The Lynis audit covers macOS and Debian hosts. There is no Windows build.</p>
+</details>
+<details>
+<summary>What happens to my SSH keys?</summary>
+<p>By default sfm uses ssh-agent or the <code>IdentityFile</code> already in your SSH config and never copies a key. If you paste or generate a dedicated key, it is stored only as AES-256-GCM ciphertext, with the master key in the OS keychain. No interface prints or returns a private key.</p>
+</details>
+<details>
+<summary>Can I let an AI agent use it?</summary>
+<p>Yes, through <code>sfm mcp</code>. Its six tools read stored scan results. The one tool that reaches a host runs the read-only status collector at most once per 60 seconds per host. Every answer carries a fixed notice that its strings are untrusted data, never instructions.</p>
+</details>
+<details>
+<summary>Does sfm send my data anywhere?</summary>
+<p>There is no telemetry and no hosted service. <code>sfm web</code> downloads vulnerability data from seven allowlisted sources. One of them, OSV.dev, receives CVE IDs only, never a package, version or hostname. <code>sfm web --offline</code> uses cached data and sends nothing.</p>
+</details>
+<details>
+<summary>Is sfm open source, and what does it cost?</summary>
+<p>sfm is proprietary software. Pricing and license terms are not announced; they will be published with the first release.</p>
+</details>
+<details>
+<summary>When can I use it?</summary>
+<p>sfm is in early development and has no public release yet. Request early access by email to be told when a build is available.</p>
+</details>
+</div>
+</div>
+</section>
+
+<section class="final">
+<div class="scope" aria-hidden="true"></div>
+<div class="wrap">
+<h2>Put every machine you own on one screen</h2>
+<p>Requesting access is one email. There is no account to create and no form to fill in.</p>
+<div class="actions">
+<a class="btn btn-lg" href="mailto:sfm@luongnv.com?subject=sfm%20early%20access"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>Request early access</a>
+</div>
+</div>
+</section>
+
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="sfm home">
+<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<path class="mark-sector" d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z"/>
+<path class="mark-range" stroke-width="2" d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"/>
+<path class="mark-sweep" stroke-width="4" stroke-linecap="round" d="M32 32L47.56 16.44"/>
+<path class="mark-ring" stroke-width="5" d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z"/>
+<path class="mark-host" d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z"/>
+</svg>
+<span>sfm</span>
+<span class="brand-name">SSH Fleet Monitor</span>
+</a>
+<ul class="foot-links">
+<li><a href="privacy.html">Privacy Policy</a></li>
+<li><a href="changelog.html">Changelog</a></li>
+<li><a href="docs.html">Docs</a></li>
+<li><a href="mailto:sfm@luongnv.com">sfm@luongnv.com</a></li>
+</ul>
+</div>
+</footer>
+</body>
+</html>

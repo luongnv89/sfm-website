@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" role="img" aria-label="sfm">
+  <title>sfm</title>
+  <g transform="translate(4 4)">
+    <!-- Layer 2 (middle detail): the swept sector and the range ring; dropped in favicon.svg -->
+    <g>
+      <path d="M32 32L15.03 15.03A24 24 0 0 1 48.97 15.03Z" fill="#FFFFFF" fill-opacity="0.2"/>
+      <path d="M20 32a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="2"/>
+    </g>
+    <!-- Layer 3 (inner): the sweep line; its tip tucks under the ring drawn next -->
+    <path d="M32 32L47.56 16.44" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <!-- Layer 1 (outer): the scope ring, the perimeter sfm keeps watch over -->
+    <path d="M8 32a24 24 0 1 0 48 0a24 24 0 1 0 -48 0Z" fill="none" stroke="#FFFFFF" stroke-width="5"/>
+    <!-- Layer 3 (inner, continued): the host the sweep has found -->
+    <path d="M20.01 40.49a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z" fill="#FFFFFF"/>
+  </g>
+  <!-- Wordmark: sfm (JetBrains Mono Bold, outlined) -->
+  <g fill="#FFFFFF" transform="translate(84 50.2)">
+    <path d="M10.18 0.43Q5.47 0.43 2.74 -1.7Q0 -3.84 0 -7.49H5.9Q5.9 -5.95 7.03 -5.14Q8.16 -4.32 10.18 -4.32H12.29Q14.45 -4.32 15.62 -5.14Q16.8 -5.95 16.8 -7.49Q16.8 -8.93 15.98 -9.62Q15.17 -10.32 13.49 -10.56L6.91 -11.42Q3.74 -11.86 2.04 -13.87Q0.34 -15.89 0.34 -19.1Q0.34 -22.85 2.83 -24.84Q5.33 -26.83 10.03 -26.83H12.24Q16.66 -26.83 19.34 -24.82Q22.03 -22.8 22.13 -19.44H16.18Q16.13 -20.69 15.07 -21.43Q14.02 -22.18 12.24 -22.18H10.03Q8.11 -22.18 7.1 -21.38Q6.1 -20.59 6.1 -19.25Q6.1 -18.05 6.84 -17.47Q7.58 -16.9 9.02 -16.75L15.22 -15.89Q18.86 -15.46 20.71 -13.32Q22.56 -11.18 22.56 -7.58Q22.56 -3.74 19.94 -1.66Q17.33 0.43 12.29 0.43Z"/>
+    <path d="M33.21 0V-17.38H25.96V-22.8H33.21V-27.46Q33.21 -30.91 35.51 -32.98Q37.82 -35.04 41.61 -35.04H49.34V-29.76H41.75Q40.6 -29.76 39.9 -29.11Q39.21 -28.46 39.21 -27.36V-22.8H49.34V-17.38H39.21V0Z"/>
+    <path d="M52.74 0V-26.4H57.73V-22.56H57.87Q58.02 -24.48 59.22 -25.68Q60.42 -26.88 62.24 -26.88Q64.02 -26.88 65.26 -25.75Q66.51 -24.62 66.94 -22.7Q67.14 -24.62 68.36 -25.75Q69.58 -26.88 71.46 -26.88Q73.86 -26.88 75.44 -24.98Q77.02 -23.09 77.02 -20.11V0H71.74V-19.68Q71.74 -20.98 71.14 -21.72Q70.54 -22.46 69.44 -22.46Q67.28 -22.46 67.28 -19.68V0H62.48V-19.68Q62.48 -20.98 61.93 -21.72Q61.38 -22.46 60.32 -22.46Q58.02 -22.46 58.02 -19.68V0Z"/>
+  </g>
+</svg>
