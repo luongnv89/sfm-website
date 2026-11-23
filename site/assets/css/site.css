@@ -634,10 +634,7 @@ h3 {
   font-size: 1.125rem;
 }
 
-.shot-pair {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.5rem;
+.shot-wide {
   margin-top: 3.5rem;
 }
 
@@ -1147,8 +1144,7 @@ td code {
   }
 
   .steps,
-  .guards,
-  .shot-pair {
+  .guards {
     grid-template-columns: minmax(0, 1fr);
   }
 
