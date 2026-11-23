@@ -1025,12 +1025,15 @@ td code {
   color: var(--muted);
 }
 
-/* ---------- Entrance: one staggered rise on load ---------- */
+/*
+ * ---------- Entrance: one staggered rise on load ----------
+ * Movement only, never opacity: a renderer that does not run animations
+ * (a link preview, a crawler's snapshot) must still see the hero text.
+ */
 
 @keyframes rise {
   from {
-    opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
 }
 
@@ -1127,6 +1130,19 @@ td code {
 
   .hero {
     padding-top: 3.5rem;
+  }
+
+  /* Keep the scope clear of the headline on a phone. */
+  .scope {
+    width: 20rem;
+    height: 20rem;
+    top: -8rem;
+    right: -11rem;
+  }
+
+  .final .scope {
+    bottom: -14rem;
+    margin-right: -10rem;
   }
 
   .section,
