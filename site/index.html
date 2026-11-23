@@ -204,7 +204,7 @@
 <div class="faq">
 <details>
 <summary>Does sfm install or change anything on my machines?</summary>
-<p>No agent, no daemon and no changes. Status and risk scans run fixed read-only scripts over SSH and write no files of their own on the host. Fix steps are text to copy: sfm never runs them. The optional Lynis audit is the one exception. It needs your consent per host, runs from a temp directory and removes it afterwards.</p>
+<p>No agent and no daemon. Status and risk scans run fixed read-only scripts over SSH and write no files of their own on the host; on a Mac with Homebrew, the risk scan's <code>brew outdated</code> may refresh Homebrew's own cache. Fix steps are text to copy: sfm never runs them. The optional Lynis audit is the one exception. It needs your consent per host, runs from a temp directory and removes it afterwards.</p>
 </details>
 <details>
 <summary>Which systems does it cover?</summary>
