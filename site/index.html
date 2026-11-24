@@ -190,7 +190,7 @@
 <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Host keys are checked strictly against your <code>known_hosts</code> file, which sfm reads and never writes. It never trusts a key on first use.</span></li>
 <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Every argument sent over SSH goes through one quoting helper, fuzz-tested in CI with 300+ payloads.</span></li>
 <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Every command sent to a host and every agent tool call is a row in an audit log that refuses updates and deletes.</span></li>
-<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Besides SSH, the only network traffic is vulnerability data from seven allowlisted HTTPS sources. There is no telemetry, and <code>--offline</code> sends nothing.</span></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Besides SSH, the only network traffic is vulnerability data from seven allowlisted HTTPS sources and, when the machine sfm runs on is in your inventory, a request to ipify for its own public IPv4 address after each of its status scans, every 5 minutes by default. There is no telemetry, and <code>--offline</code> sends nothing.</span></li>
 </ul>
 <p class="note">sfm has no public release yet, so there are no customer quotes here. These are facts about the build.</p>
 </div>
@@ -204,7 +204,11 @@
 <div class="faq">
 <details>
 <summary>Does sfm install or change anything on my machines?</summary>
-<p>No agent and no daemon. Status and risk scans run fixed read-only scripts over SSH and write no files of their own on the host; on a Mac with Homebrew, the risk scan's <code>brew outdated</code> may refresh Homebrew's own cache. Fix steps are text to copy: sfm never runs them. The optional Lynis audit is the one exception. It needs your consent per host, runs from a temp directory and removes it afterwards.</p>
+<p>No agent and no daemon. Status and risk scans run fixed read-only scripts over SSH and write no files of their own on the host; on a Mac with Homebrew, the risk scan's <code>brew outdated</code> may refresh Homebrew's own cache. If you make a host a relay, each status scan of it also runs <code>sfm relay export</code>, which adds one row to that host's own sfm audit log; a relay is a machine where you chose to install and run sfm yourself. Fix steps are text to copy: sfm never runs them. The optional Lynis audit is the one exception. It needs your consent per host, runs from a temp directory and removes it afterwards.</p>
+</details>
+<details>
+<summary>Can it watch a host I cannot reach directly?</summary>
+<p>Yes, in two ways. <code>sfm hosts add --jump</code> connects through one or more SSH jump hosts. If the host is only reachable from another machine that runs sfm too, make that machine a relay with <code>sfm hosts relay</code>: your sfm then shows its hosts as reached through it, without connecting to them or holding their keys. Relays can chain, up to 8 deep.</p>
 </details>
 <details>
 <summary>Which systems does it cover?</summary>
@@ -220,7 +224,7 @@
 </details>
 <details>
 <summary>Does sfm send my data anywhere?</summary>
-<p>There is no telemetry and no hosted service. <code>sfm web</code> downloads vulnerability data from seven allowlisted sources. One of them, OSV.dev, receives CVE IDs only, never a package, version or hostname. <code>sfm web --offline</code> uses cached data and sends nothing.</p>
+<p>There is no telemetry and no hosted service. <code>sfm web</code> downloads vulnerability data from seven allowlisted sources. One of them, OSV.dev, receives CVE IDs only, never a package, version or hostname. If you added the machine sfm runs on, <code>sfm web</code> also asks ipify for that machine's public IPv4 address after each of its status scans; the request carries no data. <code>sfm web --offline</code> uses cached data and sends nothing.</p>
 </details>
 <details>
 <summary>Is sfm open source, and what does it cost?</summary>

@@ -51,7 +51,7 @@
 <div class="wrap">
 <div class="doc-head">
 <h1>Privacy Policy</h1>
-<p class="doc-meta">Product/Service: sfm (SSH Fleet Monitor) and this website, sfm.luongnv.com<br>Effective date: 23 November 2026</p>
+<p class="doc-meta">Product/Service: sfm (SSH Fleet Monitor) and this website, sfm.luongnv.com<br>Effective date: 24 November 2026</p>
 </div>
 
 <div class="summary-box">
@@ -78,7 +78,7 @@
 <ul>
 <li><strong>GitHub</strong> hosts this website on GitHub Pages.</li>
 <li><strong>Cloudflare</strong> serves the DNS records of luongnv.com and routes mail sent to sfm@luongnv.com to the author's mailbox (Cloudflare Email Routing). Web traffic to this site does not pass through Cloudflare's proxy.</li>
-<li><strong>The sfm application.</strong> Besides the SSH connections to your own hosts, its only network traffic is downloading vulnerability data from seven allowlisted HTTPS sources: the Debian Security Tracker, Canonical's Ubuntu OVAL files, the Arch Security Tracker, the CISA Known Exploited Vulnerabilities catalog, the SOFA macOS and Safari feeds, and OSV.dev. OSV.dev receives CVE IDs only, never a package, version or hostname; those IDs are the fix-available CVEs found on your Debian hosts.</li>
+<li><strong>The sfm application.</strong> Besides the SSH connections to your own hosts, its only network traffic is downloading vulnerability data from seven allowlisted HTTPS sources (the Debian Security Tracker, Canonical's Ubuntu OVAL files, the Arch Security Tracker, the CISA Known Exploited Vulnerabilities catalog, the SOFA macOS and Safari feeds, and OSV.dev) and, if you added the machine sfm runs on to the inventory, asking ipify (<code>api.ipify.org</code>) for that machine's public IP address after each of its status scans. OSV.dev receives CVE IDs only, never a package, version or hostname; those IDs are the fix-available CVEs found on your Debian hosts. The ipify request carries no data: ipify sees only the address the request comes from, which is the answer it sends back.</li>
 <li><strong>AI clients.</strong> If you connect an AI client to <code>sfm mcp</code>, that client may send sfm's answers to its model provider. The same goes for a report you export with <code>sfm report</code>: once data leaves sfm, sfm no longer protects it.</li>
 </ul>
 
@@ -91,7 +91,7 @@
 <h2>6. Your choices</h2>
 <ul>
 <li>To ask what the author holds about you, or to ask for your emails to be deleted, write to sfm@luongnv.com.</li>
-<li>To run sfm with no outbound request for vulnerability data, start it with <code>sfm web --offline</code> or set <code>SFM_OFFLINE=1</code>.</li>
+<li>To run sfm with no outbound request, for vulnerability data or to ipify, start it with <code>sfm web --offline</code> or set <code>SFM_OFFLINE=1</code>.</li>
 </ul>
 
 <h2>7. Changes to this policy</h2>

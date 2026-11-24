@@ -66,7 +66,11 @@
 <li>Ask an AI agent about your fleet through six read-only MCP tools, or call the same tools from the command line as JSON.</li>
 <li>Follow trends over time, put the fleet on a wall screen and see it as a network topology.</li>
 <li>Export the fleet report as ECS NDJSON for Wazuh or as Prometheus text for Grafana.</li>
-<li>Add the machine sfm runs on, with no SSH server and no key.</li>
+<li>Add the machine sfm runs on, with no SSH server and no key. Its public IP stays up to date: after each of its status scans, sfm asks ipify for it, unless sfm runs with <code>--offline</code>.</li>
+<li>Monitor hosts on a private network through another machine that runs sfm (relay mode), in chains up to 8 relays deep.</li>
+<li>Set how often each host gets a status scan, from every minute to once a day, or turn it off.</li>
+<li>Disable monitoring of a host and keep its data, or remove the host and everything sfm stored about it.</li>
+<li>See when the CVE data was last updated, and refresh CVE statuses without a new scan.</li>
 </ul>
 </section>
 

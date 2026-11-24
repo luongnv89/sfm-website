@@ -59,6 +59,7 @@
 <li><a href="#first-run">First run</a></li>
 <li><a href="#configure">Configure</a></li>
 <li><a href="#commands">Commands</a></li>
+<li><a href="#relay">Relay mode</a></li>
 <li><a href="#agents">AI agents</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 </ul>
@@ -72,7 +73,7 @@
 </ul>
 
 <h2 id="install">Install</h2>
-<p>sfm is a single binary, and nothing is installed on your hosts. Builds are not public yet: <a href="mailto:sfm@luongnv.com?subject=sfm%20early%20access">request early access</a> to be told when one is available.</p>
+<p>sfm is a single binary, and nothing is installed on your hosts, except on a <a href="#relay">relay</a>, where you choose to run sfm yourself. Builds are not public yet: <a href="mailto:sfm@luongnv.com?subject=sfm%20early%20access">request early access</a> to be told when one is available.</p>
 
 <h2 id="first-run">First run</h2>
 <pre><code>sfm hosts import
@@ -98,7 +99,7 @@ sfm hosts add --local</code></pre>
 <tr><td><code>sfm hosts report ALIAS --every DURATION</code></td><td>How often <code>sfm web</code> runs a status scan of the host, from 1m to 24h; <code>--off</code> stops it, <code>--default</code> restores the default</td><td>5m</td></tr>
 <tr><td><code>sfm hosts key ALIAS</code></td><td>The host's key: ssh-agent or <code>IdentityFile</code> (<code>--existing</code>), a key file (<code>--path FILE</code>), a key pasted on stdin (<code>--paste</code>) or a new ed25519 key (<code>--generate</code>)</td><td><code>--existing</code></td></tr>
 <tr><td><code>sfm hosts consent ALIAS --grant</code></td><td>Allow the Lynis audit on the host; <code>--revoke</code> withdraws it</td><td>Not granted</td></tr>
-<tr><td><code>sfm hosts public-ip ALIAS IP</code></td><td>Set the host's public IP for the report and the topology; sfm never looks it up online</td><td>A public address found on the host's own interfaces, if any</td></tr>
+<tr><td><code>sfm hosts public-ip ALIAS IP</code></td><td>Set the host's public IP for the report and the topology. sfm looks up only the address of the machine it runs on: after each status scan of it, <code>sfm web</code> asks ipify and stores the answer when it changed, replacing a value set by hand (not with <code>--offline</code>)</td><td>A public address found on the host's own interfaces, if any</td></tr>
 </tbody>
 </table>
 </div>
@@ -119,6 +120,8 @@ sfm hosts add --local</code></pre>
 <tr><td><code>sfm hosts key ALIAS --show-public</code></td><td>Print a pasted or generated key's public line and setup steps again</td></tr>
 <tr><td><code>sfm hosts disable ALIAS</code></td><td>Stop monitoring a host and keep its stored data; <code>sfm hosts enable ALIAS</code> turns it back on</td></tr>
 <tr><td><code>sfm hosts remove ALIAS --yes</code></td><td>Remove a host and delete everything sfm stored about it; cannot be undone</td></tr>
+<tr><td><code>sfm hosts relay ALIAS --on --sfm-path PATH</code></td><td>Make a host that runs sfm a relay, so its own hosts show here as reached through it; <code>--data-dir PATH</code> when its sfm does not use the default, <code>--off</code> stops it and deletes what it brought. See <a href="#relay">Relay mode</a></td></tr>
+<tr><td><code>sfm relay export --json</code></td><td>Print this machine's hosts as JSON for an sfm that uses it as a relay; that sfm runs it over SSH, you rarely do</td></tr>
 <tr><td><code>sfm report --format ecs|prometheus</code></td><td>Print the fleet report from the stored scans as ECS NDJSON (Wazuh) or Prometheus text (Grafana); <code>--output PATH</code> writes a file, <code>--host ALIAS</code> limits it</td></tr>
 <tr><td><code>sfm mcp</code></td><td>Serve the read-only MCP tools on stdio for an AI agent</td></tr>
 <tr><td><code>sfm list-hosts --json</code></td><td>The MCP tools from the command line: also <code>get-host-status</code>, <code>list-findings</code>, <code>get-finding</code>, <code>get-fix-steps</code> and <code>refresh-host-status</code>, with the same arguments and the same JSON answer</td></tr>
@@ -128,6 +131,12 @@ sfm hosts add --local</code></pre>
 </table>
 </div>
 
+<h2 id="relay">Relay mode</h2>
+<p>Some hosts are reachable only from another machine on their network. If that machine runs sfm too, your sfm can show its hosts without connecting to them or holding their keys. Say machine B can reach host C and your machine cannot. On B, install sfm, add C and keep <code>sfm web</code> running. On your machine, add B as usual and make it a relay, with the absolute path of sfm on B:</p>
+<pre><code>sfm hosts add admin@b.example.com --alias b
+sfm hosts relay b --on --sfm-path /usr/local/bin/sfm</code></pre>
+<p>Each status scan of B then also runs <code>sfm relay export --json</code> on B in the same SSH session, and your dashboard shows C as reached via b, with the same badges and resource data. Relays can chain, up to 8 deep. A host behind a relay is managed on the relay: it has no detail page or scan button on your machine. When the relay cannot be reached or its data is more than 24 hours old, its hosts are marked stale, never down. Run the same sfm version on both machines.</p>
+<p><strong>What a relay trusts.</strong> Your login on B must be the account that runs B's sfm, and that account holds the keys B uses for its hosts. So your key on B can, in effect, reach every host B monitors. Use a dedicated key for it and restrict it in B's <code>authorized_keys</code> with <code>from="your address"</code> and <code>no-port-forwarding,no-agent-forwarding,no-pty</code>. Do not set a forced <code>command=</code>: the status scan and the export run different commands in one session. B writes every export to its own audit log.</p>
 <h2 id="agents">AI agents</h2>
 <p><code>sfm mcp</code> lets Claude Code, Codex or any other stdio MCP client answer questions about your fleet from stored scan data, with no shell. For Claude Code, put this in a project's <code>.mcp.json</code>:</p>
 <pre><code>{
